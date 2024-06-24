@@ -1,4 +1,4 @@
-﻿namespace TabuleiroItens
+﻿namespace TabComponentes
 {
     internal class Tabuleiro
     {
@@ -16,6 +16,12 @@
         public Peca RetornaPeca(int linha, int coluna)
         {
             return pecas[linha, coluna];
+        }
+
+        public void ColocarPeca(Peca peca, Posicao pos)
+        {
+            pecas[pos.Linha, pos.Coluna] = peca;
+            peca.Posicao = pos;
         }
     }
 }

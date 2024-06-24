@@ -1,20 +1,20 @@
 ﻿
-namespace TabuleiroItens
+namespace TabComponentes
 {
     internal class Posicao
     {
         public int Linha { get; set; }
-        public int Colula { get; set; }
+        public int Coluna { get; set; }
 
-        public Posicao(int linha, int colula)
+        public Posicao(int linha, int coluna)
         {
             Linha = linha;
-            Colula = colula;
+            Coluna = coluna;
         }
 
         public override string ToString()
         {
-            return $"{Linha}, {Colula}";
+            return $"{Linha}, {Coluna}";
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using TabuleiroItens.Enuns;
+﻿using TabComponentes.Enums;
 
-namespace TabuleiroItens
+namespace TabComponentes
 {
     internal class Peca
     {
@@ -10,9 +10,9 @@ namespace TabuleiroItens
         public Tabuleiro tab { get; protected set; }
 
 
-        public Peca(Posicao posicao, Cor cor, Tabuleiro tab)
+        public Peca(Tabuleiro tab, Cor cor)
         {
-            Posicao = posicao;
+            Posicao = null;
             Cor = cor;
             QtdMovimentos = 0;
             this.tab = tab;

@@ -1,4 +1,4 @@
-﻿using TabuleiroItens;
+﻿using TabComponentes;
 
 namespace SistemaJogoXadrez
 {
