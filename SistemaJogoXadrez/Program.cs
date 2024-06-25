@@ -13,9 +13,11 @@ internal class Program
 
             tab.ColocarPeca(new Rei(tab, Cor.Preto), new Posicao(0, 0));
             tab.ColocarPeca(new Torre(tab, Cor.Amarelo), new Posicao(1, 0));
-            tab.ColocarPeca(new Rei(tab, Cor.Preto), new Posicao(0, 8));
+            tab.ColocarPeca(new Rei(tab, Cor.Preto), new Posicao(0, 7));
 
             Tela.ImprimirTabuleiro(tab);
+            
+            Console.WriteLine();
         }
         catch (TabuleiroException e)
         {
