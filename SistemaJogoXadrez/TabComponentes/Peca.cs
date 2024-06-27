@@ -17,5 +17,10 @@ namespace TabComponentes
             QtdMovimentos = 0;
             this.tab = tab;
         }
+
+        public void IncrementarQtdMovimentos()
+        {
+            QtdMovimentos++;
+        }
     }
 }

@@ -9,13 +9,21 @@ internal class Program
     {
         try
         {
-            Tabuleiro tab = new Tabuleiro(8, 8);
+            Partida partida = new Partida();
+            
+            while(!partida.Terminada)
+            {
+                Console.Clear();
+                Tela.ImprimirTabuleiro(partida.Tab);
 
-            tab.ColocarPeca(new Rei(tab, Cor.Preto), new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cor.Amarelo), new Posicao(1, 0));
-            tab.ColocarPeca(new Rei(tab, Cor.Preto), new Posicao(0, 7));
+                Console.WriteLine("\n");
+                Console.Write("Origem: ");
+                Posicao origem = Tela.LerPosicaoXadrez().ToPoiscao();
+                Console.Write("Destino: ");
+                Posicao destino = Tela.LerPosicaoXadrez().ToPoiscao();
 
-            Tela.ImprimirTabuleiro(tab);
+                partida.ExecutaMovimento(origem, destino);
+            }
             
             Console.WriteLine();
         }
