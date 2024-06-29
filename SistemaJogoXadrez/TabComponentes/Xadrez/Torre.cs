@@ -15,7 +15,7 @@ namespace TabComponentes.Xadrez
             Posicao pos = new Posicao(0, 0);
 
             //Acima
-            pos.MudarPosicao(pos.Linha - 1, pos.Coluna);
+            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna);
             while (tab.ValidaPosicao(pos) && PodeMover(pos)) 
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -25,7 +25,7 @@ namespace TabComponentes.Xadrez
             }
 
             //Abaixo
-            pos.MudarPosicao(pos.Linha + 1, pos.Coluna);
+            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna);
             while (tab.ValidaPosicao(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -35,7 +35,7 @@ namespace TabComponentes.Xadrez
             }
 
             //Direita
-            pos.MudarPosicao(pos.Linha, pos.Coluna +1);
+            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna +1);
             while (tab.ValidaPosicao(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -45,7 +45,7 @@ namespace TabComponentes.Xadrez
             }
 
             //Esquerda
-            pos.MudarPosicao(pos.Linha, pos.Coluna - 1);
+            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna - 1);
             while (tab.ValidaPosicao(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -56,6 +56,14 @@ namespace TabComponentes.Xadrez
 
             return mat;
         }
+
+        /*
+        private bool PodeMover(Posicao pos)
+        {
+            Peca p = tab.RetornaPeca(pos);
+
+            return p == null || p.Cor != Cor;
+        }*/
 
         public override string ToString()
         {

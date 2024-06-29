@@ -31,5 +31,6 @@ namespace TabComponentes
 
             return p == null || p.Cor != Cor;
         }
+        
     }
 }

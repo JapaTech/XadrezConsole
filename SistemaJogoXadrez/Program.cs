@@ -19,7 +19,12 @@ internal class Program
                 Console.WriteLine("\n");
                 Console.Write("Origem: ");
                 Posicao origem = Tela.LerPosicaoXadrez().ToPoiscao();
-                Console.Write("Destino: ");
+
+                bool[,] posicoesPossiveis = partida.Tab.RetornaPeca(origem).MovimentosPossiveis();
+                Console.Clear();
+                Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
+
+                Console.Write("\nDestino: ");
                 Posicao destino = Tela.LerPosicaoXadrez().ToPoiscao();
 
                 partida.ExecutaMovimento(origem, destino);
