@@ -16,5 +16,11 @@ namespace TabComponentes
         {
             return $"{Linha}, {Coluna}";
         }
+
+        public void MudarPosicao(int linha, int coluna)
+        {
+            Linha = linha ;
+            Coluna = coluna ;
+        }
     }
 }
