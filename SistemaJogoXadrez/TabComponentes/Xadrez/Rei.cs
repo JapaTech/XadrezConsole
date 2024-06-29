@@ -77,12 +77,14 @@ namespace TabComponentes.Xadrez
             return mat;
         }
 
+        /*
         private bool PodeMover(Posicao pos)
         {
             Peca p  = tab.RetornaPeca(pos);
 
             return p == null || p.Cor !=Cor;
         }
+        */
 
     }
 }

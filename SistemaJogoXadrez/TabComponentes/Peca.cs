@@ -24,5 +24,12 @@ namespace TabComponentes
         }
 
         public abstract bool[,] MovimentosPossiveis();
+
+        protected bool PodeMover(Posicao pos)
+        {
+            Peca p = tab.RetornaPeca(pos);
+
+            return p == null || p.Cor != Cor;
+        }
     }
 }
