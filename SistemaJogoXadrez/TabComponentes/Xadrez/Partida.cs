@@ -51,7 +51,7 @@ namespace TabComponentes.Xadrez
             Tab.ColocarPeca(p, destino);
         }
 
-        public void ChecaPosicaoOrigem(Posicao pos)
+        public void ValidaPosicaoOrigem(Posicao pos)
         {
             if(Tab.RetornaPeca(pos) == null)
             {
@@ -66,6 +66,14 @@ namespace TabComponentes.Xadrez
             if (!Tab.RetornaPeca(pos).ExisteMovimentosPossiveis())
             {
                 throw new TabuleiroException("Essa peça não pode se mover");
+            }
+        }
+
+        public void ValidaPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tab.RetornaPeca(origem).PodeMoverParaPosicao(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida");
             }
         }
 

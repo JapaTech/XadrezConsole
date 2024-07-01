@@ -23,7 +23,8 @@ internal class Program
                     Console.WriteLine("Aguardando jogada do " + partida.JogadorAtual.ToString());
                     Console.Write("\nOrigem: ");
                     Posicao origem = Tela.LerPosicaoXadrez().ToPoiscao();
-                    partida.ChecaPosicaoOrigem(origem);
+                    
+                    partida.ValidaPosicaoOrigem(origem);
 
                     bool[,] posicoesPossiveis = partida.Tab.RetornaPeca(origem).MovimentosPossiveis();
                     Console.Clear();
@@ -31,6 +32,8 @@ internal class Program
 
                     Console.Write("\nDestino: ");
                     Posicao destino = Tela.LerPosicaoXadrez().ToPoiscao();
+                    
+                    partida.ValidaPosicaoDestino(origem, destino);
 
                     partida.RealizaMovimento(origem, destino);
                 }
