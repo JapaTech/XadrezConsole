@@ -1,4 +1,6 @@
-﻿using TabComponentes;
+﻿using System.Collections.Generic;
+using System.Runtime.Intrinsics.X86;
+using TabComponentes;
 using TabComponentes.Enums;
 using TabComponentes.Xadrez;
 
@@ -6,6 +8,34 @@ namespace SistemaJogoXadrez
 {
     internal class Tela
     {
+        public static void ImprimirDadosPartida(Partida partida)
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("Turno: " + partida.Turno);
+            Console.WriteLine("Aguardando jogada do " + partida.JogadorAtual.ToString());
+            ImprimirPecasCapturadas(partida);
+        }
+
+        public static void ImprimirPecasCapturadas(Partida partida)
+        {
+            Console.WriteLine("\nPEÇAS CAPTURADAS");
+            Console.Write("Brancas: ");
+            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Branco)) + "]" );
+            Console.Write("Pretas: ");
+            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Preto)) + "]" );
+            
+        }
+
+        public static string ImprimirConjuntoDePecas(HashSet<Peca> pecas)
+        {
+            string aux = "";
+            foreach (Peca peca in pecas)
+            {
+                aux += peca + " ";
+            }
+            return aux;
+        }
+
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
