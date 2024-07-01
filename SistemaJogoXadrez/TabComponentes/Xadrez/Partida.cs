@@ -6,15 +6,15 @@ namespace TabComponentes.Xadrez
     internal class Partida
     {
         public Tabuleiro Tab { get; private set; } 
-        private int turno;
-        private Cor jogadorAtual;
+        public int Turno { get; private set; }
+        public Cor JogadorAtual { get; private set; }
         public bool Terminada { get; private set; }
 
         public Partida()
         {
             Tab = new Tabuleiro(8, 8);
-            turno = 1;
-            jogadorAtual = Cor.Branco;
+            Turno = 1;
+            JogadorAtual = Cor.Branco;
             ColocarPecas();
             Terminada = false;
         }
@@ -36,12 +36,42 @@ namespace TabComponentes.Xadrez
             Tab.ColocarPeca(new Rei(Tab, Cor.Preto), new PosicaoXadrez('d', 8).ToPoiscao());
         }
 
+        public void RealizaMovimento(Posicao origem, Posicao destino)
+        {
+            ExecutaMovimento(origem, destino);
+            TrocaJogador();
+            Turno++;
+        }
+
         public void ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.RetirarPeca(origem);
             p.IncrementarQtdMovimentos();
             Peca pecaCapturada = Tab.RetirarPeca(destino);
             Tab.ColocarPeca(p, destino);
+        }
+
+        public void ChecaPosicaoOrigem(Posicao pos)
+        {
+            if(Tab.RetornaPeca(pos) == null)
+            {
+                throw new TabuleiroException("Não existe peça nessa posição");
+            }
+            
+            if (Tab.RetornaPeca(pos).Cor != JogadorAtual)
+            {
+                throw new TabuleiroException("Essa peça é do outro jogador");
+            }
+
+            if (!Tab.RetornaPeca(pos).ExisteMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Essa peça não pode se mover");
+            }
+        }
+
+        private void TrocaJogador()
+        {
+            JogadorAtual = JogadorAtual == Cor.Branco ? Cor.Preto : Cor.Branco;
         }
     }
 }

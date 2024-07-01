@@ -25,6 +25,23 @@ namespace TabComponentes
 
         public abstract bool[,] MovimentosPossiveis();
 
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] mat = MovimentosPossiveis();
+
+            for (int i = 0; i < tab.Linhas; i++)
+            {
+                for (int j = 0; j < tab.Colunas; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }   
+            return false;
+        }
+
         protected bool PodeMover(Posicao pos)
         {
             Peca p = tab.RetornaPeca(pos);
