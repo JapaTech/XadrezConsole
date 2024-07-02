@@ -28,6 +28,7 @@ internal class Program
                     Console.Clear();
                     Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
 
+                    Console.WriteLine();
                     Console.Write("\nDestino: ");
                     Posicao destino = Tela.LerPosicaoXadrez().ToPoiscao();
                     
