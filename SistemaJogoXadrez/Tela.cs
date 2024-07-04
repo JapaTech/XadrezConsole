@@ -10,14 +10,24 @@ namespace SistemaJogoXadrez
     {
         public static void ImprimirDadosPartida(Partida partida)
         {
+            Tela.ImprimirTabuleiro(partida.Tab);
             Console.WriteLine("\n");
             Console.WriteLine("Turno: " + partida.Turno);
-            Console.WriteLine("Aguardando jogada do " + partida.JogadorAtual.ToString());
             ImprimirPecasCapturadas(partida);
-            if (partida.Xeque)
+
+            if (!partida.Terminada)
             {
-                Console.WriteLine("\n" + partida.JogadorAtual + " EM XEQUE!");
+                Console.WriteLine("Aguardando jogada do " + partida.JogadorAtual.ToString());
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("\n" + partida.JogadorAtual + " EM XEQUE!");
+                }
             }
+            else
+            {
+                Console.WriteLine("\n XEQUEMATE do jogador" + partida.JogadorAtual);
+            }
+            
         }
 
         public static void ImprimirPecasCapturadas(Partida partida)

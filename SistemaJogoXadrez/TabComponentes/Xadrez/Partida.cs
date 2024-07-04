@@ -93,11 +93,17 @@ namespace TabComponentes.Xadrez
             {
                 Xeque = false;
             }
-            
-            TrocaJogador();
-            Turno++;
-        }
 
+            if (EstaEmXequeMate(Adversario(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                TrocaJogador();
+                Turno++;
+            }
+        }
 
         public void ValidaPosicaoOrigem(Posicao pos)
         {
@@ -165,6 +171,39 @@ namespace TabComponentes.Xadrez
                 }
             }
             return false;
+        }
+
+        public bool EstaEmXequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+
+            foreach (Peca peca in PecasEmJogo(cor))
+            {
+                bool[,] mat = peca.MovimentosPossiveis();
+
+                for (int i = 0; i < Tab.Linhas; i++)
+                {
+                    for (int j = 0; j < Tab.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = peca.Posicao; 
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public HashSet<Peca> PecasCapturadasPorCor(Cor cor)

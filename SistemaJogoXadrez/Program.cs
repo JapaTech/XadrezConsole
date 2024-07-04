@@ -16,7 +16,7 @@ internal class Program
                 try
                 {
                     Console.Clear();
-                    Tela.ImprimirTabuleiro(partida.Tab);
+                    
                     Tela.ImprimirDadosPartida(partida);
                     
                     Console.Write("\nOrigem: ");
