@@ -2,6 +2,7 @@
 
 namespace TabComponentes
 {
+    //Classe base das peças do tabuleiro
     internal abstract class Peca
     {
         public Posicao Posicao { get; set; }
@@ -28,8 +29,10 @@ namespace TabComponentes
             QtdMovimentos--;
         }
 
+        //Função abstrata que serve para retornar uma matriz que representa onde a peça pode se mover dentro do tabuleiro
         public abstract bool[,] MovimentosPossiveis();
 
+        //Retorna se existe pelo menos um movimento possível para a peça
         public bool ExisteMovimentosPossiveis()
         {
             bool[,] mat = MovimentosPossiveis();
@@ -47,13 +50,14 @@ namespace TabComponentes
             return false;
         }
 
-        public bool PodeMoverParaPosicao(Posicao pos)
+        //Verifica se é possível se mover para determinada posição
+        public bool ExisteMovimentoPara(Posicao pos)
         {
-            
             return MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }
 
-        protected bool PodeMover(Posicao pos)
+        //Verifica se para a onde a peça vai mover é um lugar vazio ou é com uma peça da cor adversária
+        protected bool PodeMoverPara(Posicao pos)
         {
             Peca p = tab.RetornaPeca(pos);
 

@@ -3,8 +3,8 @@ namespace TabComponentes.Enums
 {
     enum Cor
     {
-        Preto,
-        Branco,
-        Amarelo
+        Preta,
+        Branca,
+        Amarela
     }
 }

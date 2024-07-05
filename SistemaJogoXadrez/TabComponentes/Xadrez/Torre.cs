@@ -8,6 +8,7 @@ namespace TabComponentes.Xadrez
         {
         }
 
+        //Com um for ele pega a posição da torre e verifica para quais direções ela pode se mover
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] mat = new bool[tab.Linhas, tab.Colunas];
@@ -16,7 +17,7 @@ namespace TabComponentes.Xadrez
 
             //Acima
             pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna);
-            while (tab.ValidaPosicao(pos) && PodeMover(pos)) 
+            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos)) 
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
@@ -26,7 +27,7 @@ namespace TabComponentes.Xadrez
 
             //Abaixo
             pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna);
-            while (tab.ValidaPosicao(pos) && PodeMover(pos))
+            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
@@ -36,7 +37,7 @@ namespace TabComponentes.Xadrez
 
             //Direita
             pos.MudarPosicao(Posicao.Linha, Posicao.Coluna +1);
-            while (tab.ValidaPosicao(pos) && PodeMover(pos))
+            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
@@ -46,7 +47,7 @@ namespace TabComponentes.Xadrez
 
             //Esquerda
             pos.MudarPosicao(Posicao.Linha, Posicao.Coluna - 1);
-            while (tab.ValidaPosicao(pos) && PodeMover(pos))
+            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)

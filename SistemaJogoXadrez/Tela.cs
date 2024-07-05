@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Intrinsics.X86;
-using TabComponentes;
+﻿using TabComponentes;
 using TabComponentes.Enums;
 using TabComponentes.Xadrez;
 
 namespace SistemaJogoXadrez
 {
+    //Classe responsável por mostrar os elementos da tela
     internal class Tela
     {
+        //Método responsável por mostrar de quem é o turno, peças capturas, qual jogador está xeque ou quem fez xequemate
         public static void ImprimirDadosPartida(Partida partida)
         {
-            Tela.ImprimirTabuleiro(partida.Tab);
+            ImprimirTabuleiro(partida.Tab);
             Console.WriteLine("\n");
             Console.WriteLine("Turno: " + partida.Turno);
             ImprimirPecasCapturadas(partida);
@@ -20,26 +20,28 @@ namespace SistemaJogoXadrez
                 Console.WriteLine("Aguardando jogada do " + partida.JogadorAtual.ToString());
                 if (partida.Xeque)
                 {
-                    Console.WriteLine("\n" + partida.JogadorAtual + " EM XEQUE!");
+                    Console.WriteLine("\nJogador da cor " + partida.JogadorAtual + " EM XEQUE!");
                 }
             }
             else
             {
-                Console.WriteLine("\n XEQUEMATE do jogador" + partida.JogadorAtual);
+                Console.WriteLine("\n!!!XEQUE-MATE do jogador da cor " + partida.JogadorAtual + "!!!");
             }
             
         }
 
+        //Mostra as peças capturadas por cada jogador
         public static void ImprimirPecasCapturadas(Partida partida)
         {
             Console.WriteLine("\nPEÇAS CAPTURADAS");
             Console.Write("Brancas: ");
-            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Branco)) + "]" );
+            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Branca)) + "]" );
             Console.Write("Pretas: ");
-            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Preto)) + "]" );
+            Console.WriteLine("[" + ImprimirConjuntoDePecas(partida.PecasCapturadasPorCor(Cor.Preta)) + "]" );
             
         }
 
+        //Imprimi as peças da partida separadas por cor
         public static string ImprimirConjuntoDePecas(HashSet<Peca> pecas)
         {
             string aux = "";
@@ -50,6 +52,8 @@ namespace SistemaJogoXadrez
             return aux;
         }
 
+        //Função que imprimi o tabuleiro de xadrez, ela percorre as linhas e colocas os números de 1 a 8 na vertial
+        //Coloca as letras de "a" a "h" na parte inferior
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
@@ -65,6 +69,8 @@ namespace SistemaJogoXadrez
             Console.Write("  a b c d e f g h");
         }
 
+        //Esta sobrecarga também percorre todo o tabuleiro e recebe outro parâmetro, uma matriz dentro do tabuleiro
+        //Ela destaca os locais onde essa matriz marca verdadeiro.
         public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posPossiveis) 
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
@@ -93,6 +99,7 @@ namespace SistemaJogoXadrez
             Console.Write("  a b c d e f g h");
         }
 
+        //Imprimi uma peça de acordo com a sua cor
         public static void ImprimirPeca(Peca peca)
         {
             if(peca == null)
@@ -101,7 +108,7 @@ namespace SistemaJogoXadrez
             }
             else
             {
-                if (peca.Cor == Cor.Branco)
+                if (peca.Cor == Cor.Branca)
                 {
                     Console.Write(peca);
                 }
@@ -118,6 +125,7 @@ namespace SistemaJogoXadrez
             
         }
 
+        //Recebe uma posição digitada pelo usuário no formato de xadrez (exeplo: "a1")
         public static PosicaoXadrez LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
