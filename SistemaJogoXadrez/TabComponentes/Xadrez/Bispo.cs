@@ -1,10 +1,16 @@
-﻿using TabComponentes.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TabComponentes;
+using TabComponentes.Enums;
 
-namespace TabComponentes.Xadrez
+namespace SistemaJogoXadrez.TabComponentes.Xadrez
 {
-    internal class Torre : Peca
+    internal class Bispo : Peca
     {
-        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Bispo(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
@@ -15,44 +21,48 @@ namespace TabComponentes.Xadrez
 
             Posicao pos = new Posicao(0, 0);
 
-            //Acima
-            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna);
-            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos)) 
+            //Noroeste
+            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna - 1);
+            while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
                     break;
                 pos.Linha--;
+                pos.Coluna--;
             }
 
-            //Abaixo
-            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna);
+            //Sudoeste
+            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna - 1);
             while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
                     break;
                 pos.Linha++;
+                pos.Coluna--;
             }
 
-            //Direita
-            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna +1);
+            //Sudeste
+            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna + 1);
             while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
                     break;
                 pos.Coluna++;
+                pos.Linha++;
             }
 
-            //Esquerda
-            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna - 1);
+            //Nordeste
+            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
             while (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
                 if (tab.RetornaPeca(pos) != null && tab.RetornaPeca(pos).Cor != Cor)
                     break;
-                pos.Coluna--;
+                pos.Coluna++;
+                pos.Linha--;    
             }
 
             return mat;
@@ -60,7 +70,7 @@ namespace TabComponentes.Xadrez
 
         public override string ToString()
         {
-            return "T";
+            return "B";
         }
     }
 }

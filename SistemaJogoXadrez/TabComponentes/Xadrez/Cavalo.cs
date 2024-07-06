@@ -1,10 +1,16 @@
-﻿using TabComponentes.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TabComponentes;
+using TabComponentes.Enums;
 
-namespace TabComponentes.Xadrez
+namespace SistemaJogoXadrez.TabComponentes.Xadrez
 {
-    internal class Rei : Peca
+    internal class Cavalo : Peca
     {
-        public Rei(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Cavalo(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
@@ -15,57 +21,57 @@ namespace TabComponentes.Xadrez
 
             Posicao pos = new Posicao(0, 0);
 
-            //acima
-            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna);
+            //acima e esquerda
+            pos.MudarPosicao(Posicao.Linha - 2, Posicao.Coluna -1);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //nordeste
-            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
+            //acima e direita
+            pos.MudarPosicao(Posicao.Linha - 2, Posicao.Coluna + 1);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //direita
-            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna + 1);
+            //direita e sobre
+            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna + 2);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //sudeste
-            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna + 1);
+            //direita e desce
+            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna + 2);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //abaixo
-            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna);
+            //abaixo e direita
+            pos.MudarPosicao(Posicao.Linha + 2, Posicao.Coluna + 1);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //sudoeste
-            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna - 1);
+            //abaixo e esquerda
+            pos.MudarPosicao(Posicao.Linha + 2, Posicao.Coluna - 1);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //esquerda
-            pos.MudarPosicao(Posicao.Linha, Posicao.Coluna - 1);
+            //esquerda e abaixo
+            pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna - 2);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
 
-            //noroeste
-            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna - 1);
+            //esquerda e acima
+            pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna - 2);
             if (tab.ValidaPosicao(pos) && PodeMoverPara(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -75,8 +81,7 @@ namespace TabComponentes.Xadrez
         }
         public override string ToString()
         {
-            return "R";
+            return "C";
         }
-
     }
 }
