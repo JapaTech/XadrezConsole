@@ -38,12 +38,12 @@ namespace TabComponentes.Xadrez
         private void ColocarPecas()
         {
             ColocarNovaPeca('a', 1, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('b', 1, new Cavalo(Tab, Cor.Branca));
-            ColocarNovaPeca('c', 1, new Bispo(Tab, Cor.Branca));
-            ColocarNovaPeca('d', 1, new Rainha(Tab, Cor.Branca));
-            ColocarNovaPeca('e', 1, new Rei(Tab, Cor.Branca));
-            ColocarNovaPeca('f', 1, new Bispo(Tab, Cor.Branca));
-            ColocarNovaPeca('g', 1, new Cavalo(Tab, Cor.Branca));
+            //ColocarNovaPeca('b', 1, new Cavalo(Tab, Cor.Branca));
+            //ColocarNovaPeca('c', 1, new Bispo(Tab, Cor.Branca));
+            //ColocarNovaPeca('d', 1, new Rainha(Tab, Cor.Branca));
+            ColocarNovaPeca('e', 1, new Rei(Tab, Cor.Branca, this));
+            //ColocarNovaPeca('f', 1, new Bispo(Tab, Cor.Branca));
+            //ColocarNovaPeca('g', 1, new Cavalo(Tab, Cor.Branca));
             ColocarNovaPeca('h', 1, new Torre(Tab, Cor.Branca));
             ColocarNovaPeca('a', 2, new Peao(Tab, Cor.Branca));
             ColocarNovaPeca('b', 2, new Peao(Tab, Cor.Branca));
@@ -58,7 +58,7 @@ namespace TabComponentes.Xadrez
             ColocarNovaPeca('b', 8, new Cavalo(Tab, Cor.Preta));
             ColocarNovaPeca('c', 8, new Bispo(Tab, Cor.Preta));
             ColocarNovaPeca('d', 8, new Rainha(Tab, Cor.Preta));
-            ColocarNovaPeca('e', 8, new Rei(Tab, Cor.Preta));
+            ColocarNovaPeca('e', 8, new Rei(Tab, Cor.Preta, this));
             ColocarNovaPeca('f', 8, new Bispo(Tab, Cor.Preta));
             ColocarNovaPeca('g', 8, new Cavalo(Tab, Cor.Preta));
             ColocarNovaPeca('h', 8, new Torre(Tab, Cor.Preta));
@@ -86,6 +86,30 @@ namespace TabComponentes.Xadrez
             {
                 capturadas.Add(pecaCapturada);
             }
+
+            #region Jogada Especial
+            //Roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao DestinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+
+                Peca t = Tab.RetirarPeca(origemTorre);
+                t.IncrementarQtdMovimentos();
+                Tab.ColocarPeca(t, DestinoTorre);
+            }
+            //Roque Grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+
+                Peca t = Tab.RetirarPeca(origemTorre);
+                t.IncrementarQtdMovimentos();
+                Tab.ColocarPeca(t, destinoTorre);
+            }
+            #endregion
+
             return pecaCapturada;
         }
 
@@ -102,6 +126,29 @@ namespace TabComponentes.Xadrez
             }
 
             Tab.ColocarPeca(p, origem);
+
+            #region Jogada Especial
+            //Roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+
+                Peca t = Tab.RetirarPeca(destinoTorre);
+                t.DecrementarQtdMovimentos();
+                Tab.ColocarPeca(t, origemTorre);
+            }
+            //Roque Grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+
+                Peca t = Tab.RetirarPeca(destinoTorre);
+                t.DecrementarQtdMovimentos();
+                Tab.ColocarPeca(t, origemTorre);
+            }
+            #endregion
         }
 
         //Função que realiza o movimento e verifica o estado do tabuleiro após o movimento, como, por exemplo se há xeque
