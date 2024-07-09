@@ -16,7 +16,6 @@ namespace SistemaJogoXadrez.TabComponentes.Xadrez
 
         private bool EspacoLivre(Posicao pos)
         {
-
             return tab.RetornaPeca(pos) == null;
         }
 
@@ -49,13 +48,13 @@ namespace SistemaJogoXadrez.TabComponentes.Xadrez
 
                 pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
                 
-                if (ExisteInimigo(pos))
+                if (tab.ValidaPosicao(pos) && ExisteInimigo(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 pos.MudarPosicao(Posicao.Linha - 1, Posicao.Coluna - 1);
-                if (ExisteInimigo(pos))
+                if (tab.ValidaPosicao(pos) && ExisteInimigo(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
@@ -76,13 +75,13 @@ namespace SistemaJogoXadrez.TabComponentes.Xadrez
 
                 pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna + 1);
 
-                if (ExisteInimigo(pos))
+                if (tab.ValidaPosicao(pos) && ExisteInimigo(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 pos.MudarPosicao(Posicao.Linha + 1, Posicao.Coluna - 1);
-                if (ExisteInimigo(pos))
+                if (tab.ValidaPosicao(pos) && ExisteInimigo(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
