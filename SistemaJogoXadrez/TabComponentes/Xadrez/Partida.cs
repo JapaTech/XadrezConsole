@@ -90,7 +90,7 @@ namespace TabComponentes.Xadrez
                 capturadas.Add(pecaCapturada);
             }
 
-            #region Jogada Especial
+            #region Jogadas Especiais
             //Roque pequeno
             if (p is Rei && destino.Coluna == origem.Coluna + 2)
             {
@@ -101,6 +101,7 @@ namespace TabComponentes.Xadrez
                 t.IncrementarQtdMovimentos();
                 Tab.ColocarPeca(t, DestinoTorre);
             }
+
             //Roque Grande
             if (p is Rei && destino.Coluna == origem.Coluna - 2)
             {
@@ -198,7 +199,22 @@ namespace TabComponentes.Xadrez
         public void RealizaMovimento(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
+            
+            Peca p = Tab.RetornaPeca(destino);
            
+            //Promoção
+            if (p is Peao)
+            {
+                if ((p.Cor == Cor.Branca && p.Posicao.Linha == 0) || (p.Cor == Cor.Preta && p.Posicao.Linha == 7))
+                {
+                    Tab.RetirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca ra = new Rainha(Tab, p.Cor);
+                    Tab.ColocarPeca(ra, destino);
+                    pecas.Add(ra);
+                }
+            }
+
             if (EstaEmXeque(JogadorAtual))
             {
                 DesfazMovimento(origem, destino, pecaCapturada);
@@ -224,7 +240,7 @@ namespace TabComponentes.Xadrez
                 Turno++;
             }
             #region Jogada Especial
-            Peca p = Tab.RetornaPeca(destino);
+            //En passant
 
             if(p is Peao && destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2)
             {

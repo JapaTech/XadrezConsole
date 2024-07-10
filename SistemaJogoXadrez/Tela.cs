@@ -129,8 +129,27 @@ namespace SistemaJogoXadrez
         public static PosicaoXadrez LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
+            if (s.Length > 2)
+            {
+                throw new TabuleiroException("Não é uma posição do xadrez");
+            }
             char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
+
+            int linha;
+            bool ok = int.TryParse(s[1] + "", out linha);
+            if (ok)
+            {
+                linha = int.Parse(s[1] + "");
+            }
+            else
+            {
+                throw new TabuleiroException("Não é uma posição do xadrez");
+            }
+
+            if (coluna > 'h' || linha > 7)
+            {
+                throw new TabuleiroException("Não existe essa posição!");
+            }
             return new PosicaoXadrez(coluna, linha);
         }
     }
