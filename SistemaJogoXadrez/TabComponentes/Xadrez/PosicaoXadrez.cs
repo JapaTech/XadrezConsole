@@ -1,6 +1,4 @@
-﻿using TabComponentes;
-
-namespace TabComponentes.Xadrez
+﻿namespace TabComponentes.Xadrez
 {
     //Classe que lê a posição comumente usada no xadrez (exemplo: (a1))
     internal class PosicaoXadrez

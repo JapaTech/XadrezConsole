@@ -129,7 +129,7 @@ namespace SistemaJogoXadrez
         public static PosicaoXadrez LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
-            if (s.Length > 2)
+            if (s.Length > 2 || s.Length < 2)
             {
                 throw new TabuleiroException("Não é uma posição do xadrez");
             }
@@ -146,7 +146,7 @@ namespace SistemaJogoXadrez
                 throw new TabuleiroException("Não é uma posição do xadrez");
             }
 
-            if (coluna > 'h' || linha > 7)
+            if (coluna > 'h' || linha > 8)
             {
                 throw new TabuleiroException("Não existe essa posição!");
             }
